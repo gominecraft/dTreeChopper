@@ -1,0 +1,31 @@
+disabled-worlds:
+- example_world
+
+usable-tools:
+- *_axe
+
+# Max number of logs we'll try to find before giving up and running the process.
+# This is for performance and to stop an endless loop.
+max-logs-per-break: 150
+
+# We need to find at least 5 leaves attached to any given set of linked/adjacent logs
+# in order to run the break process, otherwise we assume it isn't a tree.
+#
+# WARNING: Enabling the sneak-toggle overrides this.
+leaves-required-for-tree: 5
+
+# Require the player to be sneaking to activate dTreeChopper
+require-sneaking: false
+
+# Which animation should we use?
+# Options:
+# - none - Tree vanishes!
+# - crumble - Tree crumbles!
+# - disintegrate - Tree disintegrates!
+tree-animation: none
+
+# Take the requisite amount of durability for each log broken (leaves are free!)
+take-durability: true
+
+# Allow the script to function for players that are in creative mode
+allow-creative-mode: true
