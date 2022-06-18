@@ -1,8 +1,10 @@
+# Worlds where this script should not be active
 disabled-worlds:
 - example_world
+- my_creative_world
 
-usable-tools:
-- *_axe
+chopping-tools:
+- *_axe # Do not remove this
 
 # Max number of logs we'll try to find before giving up and running the process.
 # This is for performance and to stop an endless loop.
@@ -14,15 +16,15 @@ max-logs-per-break: 150
 # WARNING: Enabling the sneak-toggle overrides this.
 leaves-required-for-tree: 5
 
-# Require the player to be sneaking to activate dTreeChopper
-require-sneaking: false
-
 # Which animation should we use?
 # Options:
 # - none - Tree vanishes!
 # - crumble - Tree crumbles!
 # - disintegrate - Tree disintegrates!
 tree-animation: none
+
+# Require the player to be sneaking to activate dTreeChopper
+require-sneaking: false
 
 # Take the requisite amount of durability for each log broken (leaves are free!)
 take-durability: true
