@@ -81,5 +81,3 @@ dTreeChopperHandler:
           - if <player.gamemode> == survival || <player.gamemode> == creative && <yaml[dtc_config].read[allow-creative-mode]>:
             # player is sneaking or require-sneaking is false
             - if <player.is_sneaking> && <yaml[dtc_config].read[require-sneaking]> || !<yaml[dtc_config].read[require-sneaking]>:
-            
-              
