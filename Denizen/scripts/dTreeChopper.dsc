@@ -77,7 +77,7 @@ dTreeChopperHandler:
       - if <yaml[dtc_config].read[usable-tools].contains[<player.item_in_hand>]>:
         # Player is not in a disabled world
         - if !<yaml[dtc_config].read[disabled-worlds].contains[player.world.name]>:
-          # Player is either in survival mode or allow-creative-mode is true
-          - if <player.gamemode> == survival || <player.gamemode> == creative && <yaml[dtc_config].read[allow-creative-mode]>:
-            # player is sneaking or require-sneaking is false
-            - if <player.is_sneaking> && <yaml[dtc_config].read[require-sneaking]> || !<yaml[dtc_config].read[require-sneaking]>:
+          # Player is in creative mode and allow-creative-mode is true OR player is in survival mode
+          - if ( <player.gamemode> == creative && <yaml[dtc_config].read[allow-creative-mode]> ) || <player.gamemode> == survival:
+            # player is sneaking and require-sneaking is true OR require-sneaking is false
+            - if ( <player.is_sneaking> && <yaml[dtc_config].read[require-sneaking]> ) || !<yaml[dtc_config].read[require-sneaking]>:
