@@ -49,7 +49,7 @@ DTCCommand:
   type: command
   debug: false
   name: dtreechopper
-  description: Show what version of dTreeChopper is installed
+  description: Show what version of dTreeChopper is installed or reload it.
   usage: /dtreechopper <&lt>version|reload<&gt>
   permission: dtreechopper.admin
   permission message: <red>Sorry, <player.name>, you do not have permission to run that command.
@@ -61,10 +61,10 @@ DTCCommand:
   script:
   - choose <context.args.get[1]||version>:
     - case version:
-      - narrate "<red>RandomDeathMessages <green>v<script[rdm_version].data_key[version]>"
+      - narrate "<red>dTreeChopper <green>v<script[rdm_version].data_key[version]>"
     - case reload:
-      - inject rdm_init
-      - narrate "<green>RandomDeathMessages has been reloaded."
+      - inject DTCInit
+      - narrate "<green>dTreeChopper has been reloaded."
     - default:
       - narrate "<red>Unknown argument: <gold><context.args.get[1]>"
 
@@ -73,10 +73,13 @@ dTreeChopperHandler:
   events:
     on player breaks *_log:
       - define material <context.material.name>
-      # Player is not in a disabled world
-      - if !<yaml[dtc_config].read[disabled-worlds].contains[player.world.name]>:
-        # Player is either in survival mode or allow-creative-mode is true
-        - if <player.gamemode> == survival || <player.gamemode> == creative && <yaml[dtc_config].read[allow-creative-mode]>:
-          # player is sneaking or require-sneaking is false
-          - if <player.is_sneaking> && <yaml[dtc_config].read[require-sneaking]> || <yaml[dtc_config].read[require-sneaking]> == false:
-            # Now we chop trees!
+      # Check if the tool being used is in the usable-tools list
+      - if <yaml[dtc_config].read[usable-tools].contains[<player.item_in_hand>]>:
+        # Player is not in a disabled world
+        - if !<yaml[dtc_config].read[disabled-worlds].contains[player.world.name]>:
+          # Player is either in survival mode or allow-creative-mode is true
+          - if <player.gamemode> == survival || <player.gamemode> == creative && <yaml[dtc_config].read[allow-creative-mode]>:
+            # player is sneaking or require-sneaking is false
+            - if <player.is_sneaking> && <yaml[dtc_config].read[require-sneaking]> || !<yaml[dtc_config].read[require-sneaking]>:
+            
+              
