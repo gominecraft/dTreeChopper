@@ -30,7 +30,7 @@ DTCInit:
   type: task
   debug: false
   script:
-  - if <server.has_file[../dTreeChopper/config.yml]>:
+  - if <util.has_file[../dTreeChopper/config.yml]>:
     - ~yaml load:../dTreeChopper/config.yml id:dtc_config
     - announce to_console "[dTreeChopper] Loaded config.yml"
   - else:
@@ -81,3 +81,4 @@ dTreeChopperHandler:
         - if ( <player.gamemode> == creative && <yaml[dtc_config].read[allow-creative-mode]> ) || <player.gamemode> == survival:
           # player is sneaking and require-sneaking is true OR require-sneaking is false
           - if ( <player.is_sneaking> && <yaml[dtc_config].read[require-sneaking]> ) || !<yaml[dtc_config].read[require-sneaking]>:
+            - foreach <player.cursor_on.flood_fill[64]> as:loc

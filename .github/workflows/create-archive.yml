@@ -1,0 +1,21 @@
+name: Create Release
+on: [create]
+defaults:
+  run:
+    shell: bash
+    working-directory: .
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    name: 'Create Release'
+    steps:
+    - name: 'Checkout'
+      uses: actions/checkout@master
+    - name: 'Archive Release'
+      run: zip -r ~/dTreeChopper.zip * -x *.git* README.md
+    - name: 'Distribute Archive'
+      uses: ncipollo/release-action@v1
+      with:
+        artifactErrorsFailBuild: true
+        artifacts: '~/dTreeChopper.zip'
+        token: ${{ secrets.GITHUB_TOKEN }}
